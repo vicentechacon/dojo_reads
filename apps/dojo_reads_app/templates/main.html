@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Books Home</title>
+</head>
+
+<div class="container">
+    <div class="row justify-content-between align-items-center">
+        <h5 class='display-4'>Welcome, {{user.first_name}}</h5>
+        <div>
+            <a href="books/add">Add Book and Review</a>
+            <a class='ml-2' href="auth/logout/">Logout</a>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <h4>Recent Book Reviews:</h4>
+            {% for review in recent_reviews %}
+            <h5>
+                <hr>
+                <li>{{review.book.title}}
+            </h5>
+            <ol>Rating: {{review.rating}}</ol>
+            <ol>
+                <a href="/users/{{review.reviewer.id}}">{{review.reviewer.first_name}}</a> says:
+                {{review.content|truncatechars:60}}
+            </ol>
+            <ol>Posted on: {{review.created_at}}</ol>
+            </li>
+
+            {% endfor %}
+        </div>
+        <div class="col-6">
+            <h4>Other Books with Reviews</h4>
+            {% for book in books %}
+            <ol><a href="/books/{{book.id}}">{{book.title}}</a></ol>
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+</div>
+
+</html>
